@@ -1,5 +1,9 @@
 # todoapp
 
+Todo app with VueJS and php.
+ -- ricr.dev
+
+
 ## Project setup
 ```
 npm install
