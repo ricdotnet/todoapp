@@ -94,7 +94,7 @@ export default {
             axios.post(url, JSON.stringify({
                 id: id
             }))
-                .then.getTodos()
+                .then(this.getTodos())
                 // .then(response => {
                 //     console.log(response)
                 //     this.getTodos() //pull todos from db
