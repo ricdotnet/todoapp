@@ -1,6 +1,7 @@
 # todoapp
 
 Todo app with VueJS and php. \n
+Front end done with Vue and backend vanilla php to store and retrieve todos.
  -- ricr.dev
 
 
