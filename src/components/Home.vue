@@ -5,7 +5,14 @@
 
         <br><br>
 
-        {{ members }}
+        <div class="w-1/2 mx-auto">
+            <input class="p-5 w-1/2 
+                bg-blue-300 
+                bg-opacity-20 
+                focus:outline-none
+                focus:ring-2
+                focus:ring-blue-400">
+        </div>
 
     </div>
 
@@ -28,10 +35,16 @@ export default {
     },
     mounted: function() {
 
+        this.connectDb()
         this.getData()
 
     },
     methods: {
+
+        connectDb() {
+            axios.get("http://ricr.test/api/retrievetodo.php")
+                .then(response => console.log(response))
+        },
 
         getData() {
             axios.get("http://ricr.dev/api/members.php")
