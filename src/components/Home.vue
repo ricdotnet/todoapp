@@ -11,7 +11,10 @@
                 bg-opacity-20 
                 focus:outline-none
                 focus:ring-2
-                focus:ring-blue-400">
+                focus:ring-blue-400" v-model="text">
+
+            <div>{{ text }}</div>
+
         </div>
 
     </div>
@@ -30,7 +33,9 @@ export default {
             name: "Ricardo Rocha",
             country: "Portugal",
 
-            members: []
+            members: [],
+            todos: [],
+            text: ''
         }
     },
     mounted: function() {
@@ -43,7 +48,7 @@ export default {
 
         connectDb() {
             axios.get("http://ricr.test/api/retrievetodo.php")
-                .then(response => console.log(response))
+                .then(response => this.todos = response.data)
         },
 
         getData() {
