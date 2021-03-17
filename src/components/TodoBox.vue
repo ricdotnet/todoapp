@@ -9,7 +9,7 @@
 
                 <div class="pb-5 border-b border-gray-600 uppercase font-bold">{{ todo.title }}</div>
 
-                <div class="p-5 border-b border-gray-600">{{ todo.content }}</div>
+                <div class="p-5 border-b border-gray-600"><pre>{{ todo.content }}</pre></div>
 
                 <!-- <div class="p-5 text-right" @click="removeTodo(todo.id)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
