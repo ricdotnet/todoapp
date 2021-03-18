@@ -4,14 +4,43 @@
         my name is {{ name }} and I am a software developer from {{ country }}. -->
 
         <div class="mb-10 text-3xl font-bold">
-            ToDo List
+            
+
+            <div v-if="checkLogin() == 'true'">
+                <span class="align-middle text-shadow">ToDo List</span>
+
+                <button @click.prevent="doLogout()" class="ml-20 text-sm pl-5 pr-5 pt-2 pb-2 bg-red-500 focus:outline-none hover:bg-red-600 active:bg-red-700 align-middle shadow">
+                    Logout
+                </button>
+            </div>
+            <div v-else>
+                <span class="align-middle text-shadow">Login or register to use the system.</span>
+            </div>
         </div>
 
-        <!-- todo form module -->
-        <todo-form ref="todoform"></todo-form>
+        <div v-if="checkLogin() == 'true'">
+            <!-- todo form module -->
+            <todo-form ref="todoform"></todo-form>
 
-        <!-- todo box module -->
-        <todo-box ref="todobox"></todo-box>
+            <!-- todo box module -->
+            <todo-box ref="todobox"></todo-box>
+        </div>
+
+        <div v-else>
+            <a href="/login" class="pl-5 pr-5 pt-2 pb-2 
+                bg-purple-600
+                hover:bg-purple-700
+                active:bg-purple-800
+                rounded-sm
+                shadow">Login</a>
+
+            <a href="#" class="ml-5 pl-5 pr-5 pt-2 pb-2 
+                bg-green-600
+                hover:bg-green-700
+                active:bg-green-800
+                rounded-sm
+                shadow">Register</a>
+        </div>
 
     </div>
 
@@ -30,7 +59,10 @@ export default {
         TodoBox,
         TodoForm 
     },
-    
+    props: {
+        isLoggedIn: Boolean
+    },
+
     name: "Home",
     
     data () {
@@ -47,9 +79,19 @@ export default {
     },
     mounted: function() {
 
+        this.checkLogin()
+        console.log(this.checkLogin())
+
     },
     methods: {
-
+        checkLogin() {
+            //console.log(localStorage.getItem("loggedIn"))
+            return localStorage.getItem("loggedIn");
+        },
+        doLogout() {
+            localStorage.setItem("loggedIn", false);
+            window.location.href = '/'
+        }
     }
 }
 
