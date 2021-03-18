@@ -8,11 +8,13 @@
             </div>
             
             <div>
-                <input v-model="username" class="w-full p-5 bg-blue-600 bg-opacity-25 outline-none rounded-md shadow" placeholder="username">
+                <input id="username" @focus="resetInput()"
+                    v-model="username" class="w-full p-5 bg-blue-600 bg-opacity-25 outline-none rounded-md shadow" placeholder="username">
             </div>
 
             <div>
-                <input v-model="password" class="mt-5 w-full p-5 bg-blue-600 bg-opacity-25 outline-none rounded-md shadow" placeholder="password">
+                <input id="password" @focus="resetInput()"
+                    type="password" v-model="password" class="mt-5 w-full p-5 bg-blue-600 bg-opacity-25 outline-none rounded-md shadow" placeholder="password">
             </div>
 
             <div>
@@ -56,8 +58,10 @@ export default {
          * do login logic
          */
         doLogin() {
-            if(this.username == "" || this.password == "") {
-                console.log("enter user data")
+            if(this.username == "") {
+                document.getElementById("username").classList.add("border-red-500", "border");
+            } else if (this.password == "") {
+                document.getElementById("password").classList.add("border-red-500", "border"); 
             } else {
             axios.post(url, JSON.stringify({
                     username: this.username,
@@ -66,12 +70,25 @@ export default {
                 .then(response => {
                     //console.log(response.data)
                     this.isLoggedIn = response.data;
-                    this.setLoginCookie();
+                    if(!this.isLoggedIn) {
+                        document.getElementById("username").classList.add("border-red-500", "border");
+                        document.getElementById("password").classList.add("border-red-500", "border"); 
+                    } else {
+                        this.setLoginCookie();
+                    }
                 })
                 //.then(response => (this.isLoggedIn = response.data))
                 // .then(response => console.log(response.data))
                 // .then(this.setLoginCookie())
             }
+        },
+
+        /**
+         * remove red borders
+         */
+        resetInput(){
+            document.getElementById("username").classList.remove("border-red-500", "border");
+            document.getElementById("password").classList.remove("border-red-500", "border"); 
         },
 
         /**

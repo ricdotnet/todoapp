@@ -3,14 +3,17 @@
     <div>
 
         <div v-if="todoList.length != 0" class="mx-auto w-2/3 md:w-1/2 lg:w-1/2">
-            
-            <div id="card" v-for="(todo, key) in todoList" :key="key">
+        <div id="card" class="flex flex-col-reverse">
+
+            <div v-for="(todo, key) in todoList" :key="key">
 
                 <div class="card bg-black bg-opacity-30 w-full mx-auto rounded-lg p-5 mb-5 overflow-ellipsis">
                     
                     <div class="pb-5 border-b border-gray-600 uppercase font-bold">{{ todo.title }}</div>
                     
-                    <div class="p-5 border-b border-gray-600" escape="false" v-html="todo.content"></div>
+                    <div class="p-5 border-b border-gray-600">
+                        <pre v-html="todo.content"></pre>
+                    </div>
 
                     <!-- <div class="p-5 text-right" @click="removeTodo(todo.id)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,6 +79,7 @@
             </div>
 
         </div>
+        </div>
         <div v-else>
             no todos.
         </div>
@@ -94,7 +98,7 @@ export default {
 
     data: function () {
         return {
-            todoList: []
+            todoList: [],
         }
     },
     mounted: function () {
@@ -123,12 +127,13 @@ export default {
                 //.then(response => (console.log(response.data)))
             this.checkIfComplete()
         },
-        removeTodo(id) {
+        async removeTodo(id) {
 
             axios.post(url, JSON.stringify({
                 id: id
             }))
-                .then(this.getTodos())
+            
+            this.getTodos()
                 // .then(response => {
                 //     console.log(response)
                 //     this.getTodos() //pull todos from db
