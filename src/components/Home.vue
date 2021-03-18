@@ -15,6 +15,7 @@
             </div>
             <div v-else>
                 <span class="align-middle text-shadow">Login or register to use the system.</span>
+                <div class="text-sm font-thin mt-5">Use 'user' and 'password' to try it.</div>
             </div>
         </div>
 
