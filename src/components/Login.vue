@@ -45,7 +45,16 @@ export default {
         }
 
     },
+    mounted() {
+
+        this.checkLogin()
+
+    },
     methods: {
+
+        /**
+         * do login logic
+         */
         doLogin() {
             if(this.username == "" || this.password == "") {
                 console.log("enter user data")
@@ -64,14 +73,31 @@ export default {
                 // .then(this.setLoginCookie())
             }
         },
+
+        /**
+         * set a login cookie on local storage
+         */
         setLoginCookie() {
             console.log(this.isLoggedIn)
             if(this.isLoggedIn) {
                 localStorage.setItem("loggedIn", true);
+                localStorage.setItem("username", this.username);
                 window.location.href = '/'
             } else {
                 localStorage.setItem("loggedIn", false);
+                localStorage.setItem("username", "");
             }
+        },
+
+        /**
+         * redirect to home page if user already logged in
+         */
+        checkLogin() {
+            let loggedStatus = localStorage.getItem("loggedIn")
+            if(loggedStatus == 'true') {
+                window.location.href = '/'
+            }
+
         }
     }
 }

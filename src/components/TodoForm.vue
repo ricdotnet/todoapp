@@ -53,7 +53,8 @@ export default {
     data () {
         return {
             title: "",
-            content: ""
+            content: "",
+            username: localStorage.getItem('username')
         }
     },
     methods: {
@@ -70,7 +71,8 @@ export default {
             } else {
                 axios.post(url, JSON.stringify({
                     title: this.title,
-                    content: this.content
+                    content: this.content,
+                    username: this.username
                 }))
                 .then(response => {
                     console.log(response.data)

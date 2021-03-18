@@ -84,12 +84,21 @@ export default {
 
     },
     methods: {
+
+        /**
+         * check logid status for form or buttons
+         */
         checkLogin() {
             //console.log(localStorage.getItem("loggedIn"))
             return localStorage.getItem("loggedIn");
         },
+
+        /**
+         * logout logic
+         */
         doLogout() {
             localStorage.setItem("loggedIn", false);
+            localStorage.setItem("username", "")
             window.location.href = '/'
         }
     }
