@@ -1,9 +1,9 @@
 <template>
     
-    <div class="mx-auto">
+    <div class="mx-auto w-2/3 md:w-1/2 lg:w-1/2">
 
         <div>
-            <input id="title" v-model="title" class="p-5 w-1/3 
+            <input id="title" v-model="title" class="p-5 w-full
                 bg-blue-300 
                 bg-opacity-20 
                 focus:outline-none
@@ -17,7 +17,7 @@
         </div>
 
         <div>
-            <textarea v-model="content" class="p-5 w-1/3 
+            <textarea v-model="content" class="p-5 w-full
                 bg-blue-300 
                 bg-opacity-20 
                 focus:outline-none
@@ -31,8 +31,8 @@
             </textarea>
         </div>
 
-        <div class="w-1/3 text-right mx-auto">
-            <button v-on:click="addTodo" class="p-2 pl-5 pr-5 mb-10
+        <div class="text-right mx-auto">
+            <button v-on:click="addTodo" class="p-2 pl-5 pr-5 mb-10 w-full
                 rounded-md 
                 bg-green-500
                 focus:outline-none

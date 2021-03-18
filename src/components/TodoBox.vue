@@ -2,10 +2,10 @@
 
     <div>
 
-        <div v-if="todoList.length != 0">
+        <div v-if="todoList.length != 0" class="mx-auto w-2/3 md:w-1/2 lg:w-1/2">
             
             <div v-for="(todo, key) in todoList" :key="key" 
-                class="card bg-black bg-opacity-30 w-1/3 mx-auto rounded-lg p-5 mb-5 overflow-ellipsis">
+                class="card bg-black bg-opacity-30 w-full mx-auto rounded-lg p-5 mb-5 overflow-ellipsis">
 
                 <div class="pb-5 border-b border-gray-600 uppercase font-bold">{{ todo.title }}</div>
 
@@ -20,7 +20,7 @@
                 <div class="w-full text-right mx-auto">
 
                     <!-- done button -->
-                    <button class="mr-3 pl-2 pr-2 pt-1 pb-1 
+                    <button class="pl-2 pr-2 pt-1 pb-1 mt-5 
                         bg-green-500
                         focus:outline-none
                         hover:bg-green-600
@@ -31,7 +31,7 @@
                     </button>
                     
                     <!-- edit button -->
-                    <button class="mr-3 pl-2 pr-2 pt-1 pb-1 
+                    <button class="ml-3 pl-2 pr-2 pt-1 pb-1 
                         bg-blue-500
                         focus:outline-none
                         hover:bg-blue-600
@@ -42,7 +42,7 @@
                     </button>
 
                     <!-- delete button -->
-                    <button @click="removeTodo(todo.id)" class="pl-2 pr-2 pt-1 pb-1 mt-5 
+                    <button @click="removeTodo(todo.id)" class="ml-3 pl-2 pr-2 pt-1 pb-1 
                         bg-red-500
                         focus:outline-none
                         hover:bg-red-600
