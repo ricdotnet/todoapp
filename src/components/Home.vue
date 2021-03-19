@@ -48,6 +48,18 @@
             made with VueJS => ricr.dev
         </div>
 
+        <!-- <button @click="timer()" :loading="loading">
+
+            <div v-if="this.loading == true">
+                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>
+
+            <div v-if="this.loading == 'done'">loaded</div>
+
+            <div v-if="!this.loading">click me</div>
+
+        </button> -->
+
     </div>
 
 </template>
@@ -70,16 +82,18 @@ export default {
     },
 
     name: "Home",
+    loading: {
+        current: false
+    },
     
     data () {
         return {
             name: "Ricardo Rocha",
             country: "Portugal",
+            loading: false
 
             //title: "",
             //content: "",
-
-            lastphoto: null
         }
     },
     mounted: function() {
@@ -109,15 +123,21 @@ export default {
             window.location.href = '/'
         },
 
-        checkDomain() {
-            // fetch("https://domaincheck.httpapi.com/api/domains/available.json?auth-userid=463565&api-key=HP6VbCX1bjv1bn898fXnTVTpI6mnbMz6&domain-name=sdvsdvsdvsdv&tlds=net", {mode: "cors"})
-            //     .then(response => console.log(response))
 
 
-            var req = new XMLHttpRequest();
-            req.open("GET", "https://domaincheck.httpapi.com/api/domains/available.json?auth-userid=463565&api-key=HP6VbCX1bjv1bn898fXnTVTpI6mnbMz6&domain-name=sdvsdvsdvsdv&tlds=net");
-            req.send();
-        }
+        // timerR() {
+
+        //     return new Promise(resolve => setTimeout(resolve, 2000))
+
+        // },
+
+        // async timer() {
+
+        //     this.loading = true;
+        //     await this.timerR();
+        //     console.log("done")
+        //     this.loading = "done";
+        // }
 
     }
 }
