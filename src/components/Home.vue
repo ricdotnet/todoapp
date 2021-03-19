@@ -43,6 +43,11 @@
                 shadow">Register</a>
         </div>
 
+
+        <div class="font-mono mt-10 mb-10">
+            made with VueJS => ricr.dev
+        </div>
+
     </div>
 
 </template>
@@ -74,14 +79,15 @@ export default {
             //title: "",
             //content: "",
 
-            members: [],
-            todos: []
+            lastphoto: null
         }
     },
     mounted: function() {
 
         this.checkLogin()
         console.log(this.checkLogin())
+
+        this.checkDomain()
 
     },
     methods: {
@@ -101,7 +107,28 @@ export default {
             localStorage.setItem("loggedIn", false);
             localStorage.setItem("username", "")
             window.location.href = '/'
+        },
+
+        checkDomain() {
+            // fetch("https://domaincheck.httpapi.com/api/domains/available.json?auth-userid=463565&api-key=HP6VbCX1bjv1bn898fXnTVTpI6mnbMz6&domain-name=sdvsdvsdvsdv&tlds=net", {mode: "cors"})
+            //     .then(response => console.log(response))
+
+
+            var req = new XMLHttpRequest();
+            req.open("GET", "https://domaincheck.httpapi.com/api/domains/available.json?auth-userid=463565&api-key=HP6VbCX1bjv1bn898fXnTVTpI6mnbMz6&domain-name=sdvsdvsdvsdv&tlds=net");
+            req.send();
         }
+
+
+// curl -X POST \
+//   https://api.instagram.com/oauth/access_token \
+//   -F client_id=303166954518505 \
+//   -F client_secret=216772645dfca81cbb744b164cfe124f \
+//   -F grant_type=authorization_code \
+//   -F redirect_uri=https://ricr.dev/ \
+//   -F code=AQCggbUcz_MtdxsRVc78fSiDB9ySTpzvxQU6tVc1z99ba_3-7aJEQzPcWb46hFUImYyu5CL0jd_vFNAfKulB-1XIRttecYY67N9DCkgISq1OJmNbWSxG1o4bgEZJm8-Pbf864KxjP7rFcaI3GqhlD8xH2ANGtMQmG7_B9u3OTCX3lcqLTBrOXiuQ4C5Vzhoc2t5QYDH9hQEhXbNFdiA1-Oa4ne-nSRmSr2Fe-C3l8fCaiA
+
+
     }
 }
 

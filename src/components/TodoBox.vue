@@ -3,12 +3,11 @@
     <div>
 
         <div v-if="todoList.length != 0" class="mx-auto w-2/3 md:w-1/2 lg:w-1/2">
-        <div id="card" class="flex flex-col-reverse">
+            
+            <ul class="flex flex-col-reverse">
 
-            <div v-for="(todo, key) in todoList" :key="key">
+                <li v-for="(todo, key) in todoList" :key="key" class="card bg-black bg-opacity-30 w-full mx-auto rounded-lg p-5 mb-5 overflow-ellipsis">
 
-                <div class="card bg-black bg-opacity-30 w-full mx-auto rounded-lg p-5 mb-5 overflow-ellipsis">
-                    
                     <div class="pb-5 border-b border-gray-600 uppercase font-bold">{{ todo.title }}</div>
                     
                     <div class="p-5 border-b border-gray-600">
@@ -74,11 +73,10 @@
 
                     </div>
 
-                </div>
+                </li>
 
-            </div>
+            </ul>
 
-        </div>
         </div>
         <div v-else>
             no todos.
@@ -95,6 +93,8 @@ import axios from 'axios';
 const url = "https://ricr.dev/api/removetodo.php"
 
 export default {
+    components: {
+    },
 
     data: function () {
         return {
@@ -115,20 +115,20 @@ export default {
 
         checkIfComplete() {
             if(this.todoList.complete == 'yes') {
-                document.getElementById("card").textContent = "sudkvhjlsdv";
-                console.log("sdvyibjkklnm")
+                // document.getElementById("card").textContent = "sudkvhjlsdv";
+                // console.log("sdvyibjkklnm")
             }
-            console.log(this.todoList)
+            //console.log(this.todoList)
         },
 
         getTodos() {
             axios.get("https://ricr.dev/api/retrievetodo.php?user="+localStorage.getItem("username"))
                 .then(response => (this.todoList = response.data))
-                //.then(response => (console.log(response.data)))
-            this.checkIfComplete()
+
+            //this.checkIfComplete()
         },
         async removeTodo(id) {
-
+            
             axios.post(url, JSON.stringify({
                 id: id
             }))
