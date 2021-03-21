@@ -134,17 +134,9 @@ export default {
             axios.post(url, JSON.stringify({
                 id: id
             }))
-
             
             this.getTodos()
-                // .then(response => {
-                //     console.log(response)
-                //     this.getTodos() //pull todos from db
-                // },
-                // (error => {
-                //     console.log(error)
-                // }))
-            //this.getTodos()
+
         },
 
         setComplete(id) {
