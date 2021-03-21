@@ -5,6 +5,9 @@ import router from './router'
 //import VueAxios from 'vue-axios'
 
 import './assets/css/index.css'
+import animate from 'animate.css'
+
+Vue.use(animate)
 
 
 // Import the Auth0 configuration

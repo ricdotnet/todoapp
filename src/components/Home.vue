@@ -29,13 +29,13 @@
 
         <div v-else>
             <a href="/login" class="pl-5 pr-5 pt-2 pb-2 
-                bg-purple-600
-                hover:bg-purple-700
-                active:bg-purple-800
+                bg-blue-500
+                hover:bg-blue-600
+                active:bg-blue-700
                 rounded-sm
                 shadow">Login</a>
 
-            <a href="#" class="ml-5 pl-5 pr-5 pt-2 pb-2 
+            <a href="/register" class="ml-5 pl-5 pr-5 pt-2 pb-2 
                 bg-green-600
                 hover:bg-green-700
                 active:bg-green-800
@@ -99,9 +99,6 @@ export default {
     mounted: function() {
 
         this.checkLogin()
-        console.log(this.checkLogin())
-
-        this.checkDomain()
 
     },
     methods: {
@@ -137,6 +134,7 @@ export default {
         //     await this.timerR();
         //     console.log("done")
         //     this.loading = "done";
+            
         // }
 
     }

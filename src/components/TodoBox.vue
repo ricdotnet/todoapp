@@ -4,21 +4,18 @@
 
         <div v-if="todoList.length != 0" class="mx-auto w-2/3 md:w-1/2 lg:w-1/2">
             
-            <ul class="flex flex-col-reverse">
-
-                <li v-for="(todo, key) in todoList" :key="key" class="card bg-black bg-opacity-30 w-full mx-auto rounded-lg p-5 mb-5 overflow-ellipsis">
+            <transition-group
+                    enter-active-class="animate__bounceIn"
+                    leave-active-class="animate__bounceOut" tag="ul">
+                
+                <li v-for="todo in todoList" :key="todo.id" class="card bg-black bg-opacity-30 w-full
+                mx-auto rounded-lg p-5 mb-5 overflow-ellipsis" v-bind:id="todo.id">
 
                     <div class="pb-5 border-b border-gray-600 uppercase font-bold">{{ todo.title }}</div>
                     
                     <div class="p-5 border-b border-gray-600">
                         <pre v-html="todo.content"></pre>
                     </div>
-
-                    <!-- <div class="p-5 text-right" @click="removeTodo(todo.id)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="50px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                    </div> -->
 
                     <div class="w-full text-right mx-auto flex">
 
@@ -70,12 +67,9 @@
                                 </svg>
                             </button>
                         </div>
-
                     </div>
-
                 </li>
-
-            </ul>
+            </transition-group>
 
         </div>
         <div v-else>
@@ -93,12 +87,10 @@ import axios from 'axios';
 const url = "https://ricr.dev/api/removetodo.php"
 
 export default {
-    components: {
-    },
 
-    data: function () {
+    data() {
         return {
-            todoList: [],
+            todoList: []
         }
     },
     mounted: function () {
@@ -110,6 +102,7 @@ export default {
     computed: {
 
     },
+
     methods: {
 
 
@@ -122,16 +115,21 @@ export default {
         },
 
         getTodos() {
+            this.bounceOut = false;
             axios.get("https://ricr.dev/api/retrievetodo.php?user="+localStorage.getItem("username"))
                 .then(response => (this.todoList = response.data))
 
             //this.checkIfComplete()
         },
-        async removeTodo(id) {
-            
+
+        removeTodo(id) {
+
+            this.bounceOut = true;
+                
             axios.post(url, JSON.stringify({
                 id: id
             }))
+
             
             this.getTodos()
                 // .then(response => {
@@ -143,6 +141,7 @@ export default {
                 // }))
             //this.getTodos()
         },
+
         setComplete(id) {
             axios.get("https://ricr.dev/api/removetodo.php?complete=yes&id="+id)
                 .then(response => console.log(response.data))
