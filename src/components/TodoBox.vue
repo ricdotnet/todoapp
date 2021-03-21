@@ -2,12 +2,20 @@
 
     <div>
 
-        <div v-if="todoList.length != 0" class="mx-auto w-2/3 md:w-1/2 lg:w-1/2">
+        <div class="mx-auto w-2/3 md:w-1/2 lg:w-1/2">
             
+            <transition enter-active-class="animate__bounceIn" leave-active-class="animate__bounceOut">
+                <div v-if="todoList.length == 0" class="p-5 
+                    bg-red-200 bg-opacity-10
+                    rounded-md shadow font-semibold">
+                    Add your first ToDo.
+                </div>
+            </transition>
+
             <transition-group
                     enter-active-class="animate__bounceIn"
                     leave-active-class="animate__bounceOut" tag="ul">
-                
+
                 <li v-for="todo in todoList" :key="todo.id" class="card bg-black bg-opacity-30 w-full
                 mx-auto rounded-lg p-5 mb-5 overflow-ellipsis" v-bind:id="todo.id">
 
@@ -71,9 +79,6 @@
                 </li>
             </transition-group>
 
-        </div>
-        <div v-else>
-            no todos.
         </div>
 
 
