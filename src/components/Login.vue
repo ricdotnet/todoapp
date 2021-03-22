@@ -1,3 +1,11 @@
+<!--
+
+    This file is now deprecated!!!!!
+
+-->
+
+
+
 <template>
     
     <div class="w-2/3 md:w-1/2 lg:w-1/3 mx-auto text-center mt-10">
@@ -52,9 +60,9 @@
 
 <script>
 
-import axios from 'axios'
+//import axios from 'axios'
 
-const url = "https://ricr.dev/api/login.php";
+//const url = "https://ricr.dev/api/login.php";
 
 export default {
     data() {
@@ -80,53 +88,53 @@ export default {
          * do login logic
          */
         doLogin() {
-            this.loading = true;
-            console.log("loading")
-            if(this.username == "") {
-                //document.getElementById("username").classList.add("border-red-500", "border");
+            // this.loading = true;
+            // console.log("loading")
+            // if(this.username == "") {
+            //     //document.getElementById("username").classList.add("border-red-500", "border");
                 
-                this.errorMessage = "Please enter a username."
-                this.showErrorMessage = true;
-                setTimeout(() => {
-                    this.showErrorMessage = false;
-                }, 4000);
+            //     this.errorMessage = "Please enter a username."
+            //     this.showErrorMessage = true;
+            //     setTimeout(() => {
+            //         this.showErrorMessage = false;
+            //     }, 4000);
 
-            } else if (this.password == "") {
-                //document.getElementById("password").classList.add("border-red-500", "border"); 
+            // } else if (this.password == "") {
+            //     //document.getElementById("password").classList.add("border-red-500", "border"); 
                 
-                this.errorMessage = "Please enter a password."
-                this.showErrorMessage = true;
-                setTimeout(() => {
-                    this.showErrorMessage = false;
-                }, 4000);
+            //     this.errorMessage = "Please enter a password."
+            //     this.showErrorMessage = true;
+            //     setTimeout(() => {
+            //         this.showErrorMessage = false;
+            //     }, 4000);
 
-            } else {
-            axios.post(url, JSON.stringify({
-                    username: this.username,
-                    password: this.password
-                }))
-                .then(response => {
-                    //console.log(response.data)
-                    this.isLoggedIn = response.data;
-                    if(!this.isLoggedIn) {
-                        //document.getElementById("username").classList.add("border-red-500", "border");
-                        //document.getElementById("password").classList.add("border-red-500", "border"); 
+            // } else {
+            // axios.post(url, JSON.stringify({
+            //         username: this.username,
+            //         password: this.password
+            //     }))
+            //     .then(response => {
+            //         //console.log(response.data)
+            //         this.isLoggedIn = response.data;
+            //         if(!this.isLoggedIn) {
+            //             //document.getElementById("username").classList.add("border-red-500", "border");
+            //             //document.getElementById("password").classList.add("border-red-500", "border"); 
                         
-                        this.errorMessage = "No user was found with those details."
-                        this.showErrorMessage = true;
-                        setTimeout(() => {
-                            this.showErrorMessage = false;
-                        }, 4000);
+            //             this.errorMessage = "No user was found with those details."
+            //             this.showErrorMessage = true;
+            //             setTimeout(() => {
+            //                 this.showErrorMessage = false;
+            //             }, 4000);
 
-                    } else {
-                        this.setLoginCookie();
-                    }
-                })
-                //.then(response => (this.isLoggedIn = response.data))
-                // .then(response => console.log(response.data))
-                // .then(this.setLoginCookie())
-            }
-            this.loading = false;
+            //         } else {
+            //             this.setLoginCookie();
+            //         }
+            //     })
+            //     //.then(response => (this.isLoggedIn = response.data))
+            //     // .then(response => console.log(response.data))
+            //     // .then(this.setLoginCookie())
+            // }
+            // this.loading = false;
         },
 
         /**
@@ -142,25 +150,39 @@ export default {
          */
         setLoginCookie() {
 
-            console.log(this.isLoggedIn)
-            if(this.isLoggedIn) {
-                localStorage.setItem("loggedIn", true);
-                localStorage.setItem("username", this.username);
-                window.location.href = '/'
-            } else {
-                localStorage.setItem("loggedIn", false);
-                localStorage.setItem("username", "");
-            }
+            // console.log(this.isLoggedIn)
+            // if(this.isLoggedIn) {
+            //     localStorage.setItem("loggedIn", true);
+            //     localStorage.setItem("username", this.username);
+            //     window.location.href = '/'
+            // } else {
+            //     localStorage.setItem("loggedIn", false);
+            //     localStorage.setItem("username", "");
+            // }
         },
 
         /**
          * redirect to home page if user already logged in
          */
         checkLogin() {
-            let loggedStatus = localStorage.getItem("loggedIn")
-            if(loggedStatus == 'true') {
-                window.location.href = '/'
-            }
+
+            // axios.post(url, JSON.stringify({
+            //         username: localStorage.getItem("username")
+            //         //password: this.password
+            //     }))
+            //     .then(response => {
+            //         if(response.data == "true") {
+            //             window.location.href = '/';
+            //         } else {
+            //             localStorage.setItem("loggedIn", false);
+            //             localStorage.setItem("username", "");
+            //         }
+            //     })
+
+            // let loggedStatus = localStorage.getItem("loggedIn")
+            // if(loggedStatus == 'true') {
+            //     window.location.href = '/'
+            // }
 
         }
     }

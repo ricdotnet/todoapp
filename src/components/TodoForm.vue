@@ -53,8 +53,7 @@ export default {
     data () {
         return {
             title: "",
-            content: "",
-            username: localStorage.getItem('username')
+            content: ""
         }
     },
     methods: {
@@ -72,15 +71,16 @@ export default {
                 axios.post(url, JSON.stringify({
                     title: this.title,
                     content: this.content,
-                    username: this.username
+                    userid: this.$auth.user.sub
                 }))
                 .then(response => {
                     console.log(response.data)
                     this.resetFields()
-                },
-                (error) => {
-                    console.log(error)
                 })
+                // (error) => {
+                //     console.log(error)
+                // })
+
                 //this.resetFields()
             }
         },
