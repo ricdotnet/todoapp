@@ -74,7 +74,7 @@ export default {
                     userid: this.$auth.user.sub
                 }))
                 .then(response => {
-                    console.log(response.data)
+                    response ? console.log("added") : console.log("an error occurred")
                     this.resetFields()
                 })
                 // (error) => {
