@@ -22,15 +22,5 @@ export default new Router ({
             name: 'register',
             component: () => import('@/components/Register')
         }
-        // {
-        //     path: '/portfolio',
-        //     name: 'portfolio',
-        //     component: () => import('@/components/Portfolio')
-        // },
-        // {
-        //     path: '/contact',
-        //     name: 'contact',
-        //     component: () => import('@/components/Contact')
-        // }
     ]
 })
