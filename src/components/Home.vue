@@ -98,7 +98,7 @@ export default {
         // Log the user out
         logout() {
             this.$auth.logout({
-                returnTo: "http://todoapp.ricr.dev/"
+                returnTo: "https://todoapp.ricr.dev/"
             });
         },
 
