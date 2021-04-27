@@ -105,7 +105,7 @@
             </transition-group>
 
             <transition enter-active-class="animate__bounceIn" leave-active-class="animate__bounceOut">
-                <div v-if="todoList.length == 0" class="p-5 
+                <div v-if="todoList.length == 0" class="p-5
                     bg-red-200 bg-opacity-10
                     rounded-md shadow font-semibold">
                     Add your first ToDo.
@@ -122,7 +122,7 @@
 <script>
 import axios from 'axios';
 
-const url = "https://ricr.dev/api/removetodo.php"
+const url = "https://rrocha.uk/todoapi/removetodo.php"
 
 export default {
 
@@ -153,7 +153,7 @@ export default {
 
             //console.log(this.$auth.user.sub)
 
-            axios.get(`https://ricr.dev/api/retrievetodo.php?user=${this.$auth.user.sub}`)
+            axios.get(`https://rrocha.uk/todoapi/retrievetodo.php?user=${this.$auth.user.sub}`)
                 .then(response => (this.todoList = response.data))
 
         },
@@ -172,7 +172,7 @@ export default {
         },
 
         setComplete(id) {
-            axios.get(`https://ricr.dev/api/removetodo.php?complete=yes&id=${id}`)
+            axios.get(`https://rrocha.uk/todoapi/removetodo.php?complete=yes&id=${id}`)
                 .then(response => {
                     response ? console.log(`completed ${id}`) : console.log("an error occurred")
                 })
@@ -193,7 +193,7 @@ export default {
     },
     created() {
 
-        this.$root.$refs.oof = this;
+        this.$root.$refs.getTodos = this;
 
     }
 

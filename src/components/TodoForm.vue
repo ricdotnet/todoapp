@@ -47,7 +47,7 @@
 <script>
 import axios from 'axios'
 
-const url = "https://ricr.dev/api/addtodo.php"
+const url = "https://rrocha.uk/todoapi/addtodo.php"
 
 export default {
     data () {
@@ -69,12 +69,12 @@ export default {
 
             } else {
                 axios.post(url, JSON.stringify({
-                    title: this.title,
-                    content: this.content,
-                    userid: this.$auth.user.sub
-                }))
-                .then(response => {
-                    response ? console.log("added") : console.log("an error occurred")
+						title: this.title,
+						content: this.content,
+						userid: this.$auth.user.sub
+					}))
+						.then(response => {
+							response ? console.log("added") : console.log("an error occurred")
                     this.resetFields()
                 })
                 // (error) => {
@@ -88,7 +88,7 @@ export default {
             this.title = "",
             this.content = ""
 
-            this.$root.$refs.oof.getTodos()
+            this.$root.$refs.getTodos.getTodos()
         }
     }
 }
