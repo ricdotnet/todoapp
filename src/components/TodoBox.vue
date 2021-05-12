@@ -122,7 +122,7 @@
 <script>
 import axios from 'axios';
 
-const url = "http://rrocha.uk/todoapi/removetodo.php"
+const url = "https://rrocha.uk/todoapi/removetodo.php"
 
 export default {
 
@@ -153,7 +153,7 @@ export default {
 
             //console.log(this.$auth.user.sub)
 
-            axios.get(`http://rrocha.uk/todoapi/retrievetodo.php?user=${this.$auth.user.sub}`)
+            axios.get(`https://rrocha.uk/todoapi/retrievetodo.php?user=${this.$auth.user.sub}`)
                 .then(response => (this.todoList = response.data))
 
         },
@@ -172,7 +172,7 @@ export default {
         },
 
         setComplete(id) {
-            axios.get(`http://rrocha.uk/todoapi/removetodo.php?complete=yes&id=${id}`)
+            axios.get(`https://rrocha.uk/todoapi/removetodo.php?complete=yes&id=${id}`)
                 .then(response => {
                     response ? console.log(`completed ${id}`) : console.log("an error occurred")
                 })
