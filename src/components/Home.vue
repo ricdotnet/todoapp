@@ -3,7 +3,7 @@
         <!-- Hello, :)<br>
         my name is {{ name }} and I am a software developer from {{ country }}. -->
 
-        <!-- <button class="p-3 bg-black focus:outline-none" @click="toggleDarkMode()">{{ this.isDarkMode ? "dark" : "light" }}</button> -->
+<!--         <button class="p-3 bg-black focus:outline-none" @click="toggleDarkMode()">{{ this.isDarkMode ? "dark" : "light" }}</button>-->
 
         <div v-if="$auth.loading">
             <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto animate-spin" width="30px" fill="none" viewBox="0 0 24 24" stroke="currentColor">

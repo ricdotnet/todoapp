@@ -6,9 +6,9 @@
 
             <transition-group
                     enter-active-class="animate__bounceIn"
-                    leave-active-class="animate__bounceOut" tag="ul">
+                    leave-active-class="animate__bounceOut" tag="div">
 
-                <li v-for="todo in todoList" :key="todo.id" class="card bg-black bg-opacity-30 w-full
+                <div v-for="todo in todoList" :key="todo.id" class="card bg-black bg-opacity-30 w-full
                 mx-auto rounded-lg p-5 mb-5 overflow-ellipsis" v-bind:id="todo.id">
 
                     <div class="pb-5 border-b border-gray-600 uppercase font-bold">{{ todo.title }}</div>
@@ -100,7 +100,7 @@
                             </button>
                         </div>
                     </div>
-                </li>
+                </div>
 
             </transition-group>
 
