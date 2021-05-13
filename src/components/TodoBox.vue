@@ -4,20 +4,25 @@
 
         <div class="mx-auto w-2/3 md:w-1/2 lg:w-1/2">
 
+<!--			<ModalBox v-show="this.showEditModal" contenteditable="true" title="Edit..." text="Editing this modal uuuhhhhhiiiiiiuuuhhh" />-->
+
             <transition-group
                     enter-active-class="animate__bounceIn"
-                    leave-active-class="animate__bounceOut" tag="div">
+                    leave-active-class="animate__bounceOut" tag="ul">
 
-                <div v-for="todo in todoList" :key="todo.id" class="card bg-black bg-opacity-30 w-full
+                <li v-for="todo in todoList" :key="todo.id" class="card bg-black bg-opacity-30 w-full
                 mx-auto rounded-lg p-5 mb-5 overflow-ellipsis" v-bind:id="todo.id">
 
-                    <div class="pb-5 border-b border-gray-600 uppercase font-bold">{{ todo.title }}</div>
+                    <div class="pb-5 border-b border-gray-600 uppercase font-bold">{{ todo.title }} {{ todo.id }}</div>
                     
                     <div class="p-5 border-b border-gray-600">
-                        <div v-if="todo.complete == 'no'">
+                        <div v-if="todo.complete === 'no'">
                             <!-- <pre v-html="todo.content"></pre> -->
-                            <div class="whitespace-pre-line font-mono">{{ todo.content }}</div>
-                        </div>
+
+                            <div :contenteditable="editMode" class="transition duration-300 whitespace-pre-line font-mono rounded"
+								:class="{ 'bg-white text-black':editMode, '':editMode }" id="todoContent">{{ todo.content }}</div>
+
+						</div>
                         <div v-else class="font-semibold">
                             <div class="whitespace-pre-line font-mono line-through">{{ todo.content }}</div>
                         </div>
@@ -26,8 +31,8 @@
                     <div class="w-full text-right mx-auto flex">
 
                         <!-- done button -->
-                        <div v-if="todo.complete == 'no'">
-                            <button @click.prevent="showConfirmComplete()" class="pl-2 pr-2 pt-1 pb-1 mt-5 
+                        <div v-if="todo.complete === 'no'">
+                            <button @click.prevent="showConfirmComplete(); currentTodo = todo.id" class="pl-2 pr-2 pt-1 pb-1 mt-5
                                 bg-green-500
                                 focus:outline-none
                                 hover:bg-green-600
@@ -39,14 +44,15 @@
                             </button>
 
                             <!-- modal box show -->
-                            <div v-if="confirmComplete" class="fixed bg-black w-full h-full top-0 left-0 bg-opacity-30">
+                            <div v-show="confirmComplete" class="fixed bg-black w-full h-full top-0 left-0 bg-opacity-30">
                                 <div class="w-auto h-auto p-10 bg-black absolute
                                     left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-80
                                     font-semibold rounded-md">
                                     <div class="mb-10">
                                         Have you really completed this ToDo item?
                                     </div>
-                                    <button @click.prevent="setComplete(todo.id), getTodos(), showConfirmComplete()"
+<!--									<button @click.prevent="setComplete(todo.id), getTodos(), showConfirmComplete()"-->
+									<button @click.prevent="setComplete(), getTodos(), showConfirmComplete()"
                                         class="p-1 bg-green-600 mr-10">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
@@ -75,14 +81,28 @@
                         
                         <!-- edit button -->
                         <div>
-                            <button class="mt-5 ml-3 pl-2 pr-2 pt-1 pb-1 
+                            <button class="mt-5 ml-3 pl-2 pr-2 pt-1 pb-1
                                 bg-blue-500
                                 focus:outline-none
                                 hover:bg-blue-600
-                                active:bg-blue-700 rounded-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                </svg>
+                                active:bg-blue-700 rounded-sm" @click="editMode = !editMode; saveTodo(todo.id)">
+								<span v-show="!editMode">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+									</svg>
+								</span>
+								<span class="flex" v-show="editMode">
+									<span class="relative animate-ping">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+										</svg>
+									</span>
+									<span class="absolute">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+										</svg>
+									</span>
+								</span>
                             </button>
                         </div>
 
@@ -100,7 +120,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </li>
 
             </transition-group>
 
@@ -122,59 +142,62 @@
 <script>
 import axios from 'axios';
 
-const url = "https://rrocha.uk/todoapi/removetodo.php"
-
 export default {
-
-    data() {
+	data() {
         return {
             todoList: [],
-            confirmComplete: false
+            confirmComplete: false,
+			showEditModal: false,
+			editMode: false,
+			currentTodo: ''
         }
     },
     mounted: function () {
 
         this.getTodos()
 
+		window.addEventListener('keydown', event => {
+			if(event.key === 'Escape') {
+				this.showEditModal = false
+				this.confirmComplete = false
+			}
+		})
+
     },
 
     methods: {
 
-
-        checkIfComplete() {
-            if(this.todoList.complete == 'yes') {
-                // document.getElementById("card").textContent = "sudkvhjlsdv";
-                // console.log("sdvyibjkklnm")
-            }
-            //console.log(this.todoList)
-        },
-
-        getTodos() {
+        async getTodos() {
 
             //console.log(this.$auth.user.sub)
 
-            axios.get(`https://rrocha.uk/todoapi/retrievetodo.php?user=${this.$auth.user.sub}`)
-                .then(response => (this.todoList = response.data))
-
+            await axios.get(`https://rrocha.uk/todoapi/retrievetodo.php?user=${this.$auth.user.sub}`)
+                // .then(response => (this.todoList = response.data))
+				.then(response => {
+					this.todoList = []
+					for(let todo in response.data) {
+						this.todoList.push(response.data[todo])
+					}
+				})
         },
 
-        removeTodo(id) {
+        async removeTodo(id) {
                 
-            axios.post(url, JSON.stringify({
+            await axios.post(`https://rrocha.uk/todoapi/removetodo.php`, JSON.stringify({
                 id: id
             }))
             .then(response => {
                 response ? console.log(`removed ${id}`) : console.log("an error occurred")
             })
             
-            this.getTodos()
+            await this.getTodos()
 
         },
 
-        setComplete(id) {
-            axios.get(`https://rrocha.uk/todoapi/removetodo.php?complete=yes&id=${id}`)
+        async setComplete() {
+            await axios.get(`https://rrocha.uk/todoapi/removetodo.php?complete=yes&id=${this.currentTodo}`)
                 .then(response => {
-                    response ? console.log(`completed ${id}`) : console.log("an error occurred")
+                    response ? console.log(`completed ${this.currentTodo}`) : console.log("an error occurred")
                 })
             //console.log(id)
         },
@@ -182,19 +205,30 @@ export default {
 
         //toggle confirm complete
         showConfirmComplete() {
-            if(this.confirmComplete == false) {
-                this.confirmComplete = true;
-            } else {
-                this.confirmComplete = false;
-            }
-        }
+            this.confirmComplete = this.confirmComplete === false;
+        },
+
+		//saving todo
+		async saveTodo(id) {
+			const todoContent = document.getElementById('todoContent');
+			if(!this.editMode) {
+				await axios.post(`https://rrocha.uk/todoapi/savetodo.php`, JSON.stringify({
+					todoid: id,
+					content: todoContent.innerText
+				}))
+					.then(response => {
+						response ? console.log("saved") : console.log("an error occurred")
+						//console.log(response)
+					})
+			}
+		}
 
 
     },
     created() {
 
         this.$root.$refs.getTodos = this;
-
+		// this.$root.$refs.todoList = this;
     }
 
 }

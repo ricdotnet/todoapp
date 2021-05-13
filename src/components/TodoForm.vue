@@ -59,11 +59,11 @@ export default {
     methods: {
 
         addTodo() {
-            if(this.title == "") {
+            if(this.title === "") {
 
                 alert("add a title")
             
-            } else if(this.content == "") {
+            } else if(this.content === "") {
 
                 alert("add the content")
 
@@ -75,6 +75,7 @@ export default {
 					}))
 						.then(response => {
 							response ? console.log("added") : console.log("an error occurred")
+
                     this.resetFields()
                 })
                 // (error) => {
@@ -85,7 +86,7 @@ export default {
             }
         },
         resetFields() {
-            this.title = "",
+            this.title = ""
             this.content = ""
 
             this.$root.$refs.getTodos.getTodos()
