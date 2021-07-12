@@ -171,7 +171,7 @@ export default {
 
             //console.log(this.$auth.user.sub)
 
-            await axios.get(`https://rrocha.uk/todoapi/retrievetodo.php?user=${this.$auth.user.sub}`)
+            await axios.get(`http://admin.rrocha.uk/todoapi/retrievetodo.php?user=${this.$auth.user.sub}`)
                 // .then(response => (this.todoList = response.data))
 				.then(response => {
 					this.todoList = []
@@ -183,7 +183,7 @@ export default {
 
         async removeTodo(id) {
                 
-            await axios.post(`https://rrocha.uk/todoapi/removetodo.php`, JSON.stringify({
+            await axios.post(`http://admin.rrocha.uk/todoapi/removetodo.php`, JSON.stringify({
                 id: id
             }))
             .then(response => {
@@ -195,7 +195,7 @@ export default {
         },
 
         async setComplete() {
-            await axios.get(`https://rrocha.uk/todoapi/removetodo.php?complete=yes&id=${this.currentTodo}`)
+            await axios.get(`http://admin.rrocha.uk/todoapi/removetodo.php?complete=yes&id=${this.currentTodo}`)
                 .then(response => {
                     response ? console.log(`completed ${this.currentTodo}`) : console.log("an error occurred")
                 })
@@ -212,7 +212,7 @@ export default {
 		async saveTodo(id) {
 			const todoContent = document.getElementById('todoContent');
 			if(!this.editMode) {
-				await axios.post(`https://rrocha.uk/todoapi/savetodo.php`, JSON.stringify({
+				await axios.post(`http://admin.rrocha.uk/todoapi/savetodo.php`, JSON.stringify({
 					todoid: id,
 					content: todoContent.innerText
 				}))
