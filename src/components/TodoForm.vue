@@ -47,7 +47,7 @@
 <script>
 import axios from 'axios'
 
-const url = "https://rrocha.uk/todoapi/addtodo.php"
+const url = "http://admin.rrocha.uk/todoapi/addtodo.php"
 
 export default {
     data () {
