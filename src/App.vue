@@ -1,7 +1,9 @@
 <template>
     <div id="app">
-
+    {{this.$api}} --- hey
         <router-view />
+
+        
 
     </div>
 </template>
