@@ -348,7 +348,7 @@ export default {
 
       await axios
         .get(
-          `${this.api}/retrievetodo.php?user=${this.$auth.user.sub}`
+          `https://ricrdev-todoapi.herokuapp.com/retrievetodo.php?user=${this.$auth.user.sub}`
         )
         // .then(response => (this.todoList = response.data))
         .then((response) => {
@@ -362,7 +362,7 @@ export default {
     async removeTodo(id) {
       await axios
         .post(
-          `${this.$api}/removetodo.php`,
+          `https://ricrdev-todoapi.herokuapp.com/removetodo.php`,
           JSON.stringify({
             id: id,
           })
@@ -379,7 +379,7 @@ export default {
     async setComplete() {
       await axios
         .get(
-          `${this.$api}/removetodo.php?complete=yes&id=${this.currentTodo}`
+          `https://ricrdev-todoapi.herokuapp.com/removetodo.php?complete=yes&id=${this.currentTodo}`
         )
         .then((response) => {
           response
@@ -400,7 +400,7 @@ export default {
       if (!this.editMode) {
         await axios
           .post(
-            `${this.$api}/savetodo.php`,
+            `https://ricrdev-todoapi.herokuapp.com/savetodo.php`,
             JSON.stringify({
               todoid: id,
               content: todoContent.innerText,

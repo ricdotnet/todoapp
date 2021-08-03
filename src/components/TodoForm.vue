@@ -80,7 +80,7 @@ export default {
       } else {
         axios
           .post(
-            `${this.$api}/addtodo.php`,
+            `https://ricrdev-todoapi.herokuapp.com/addtodo.php`,
             JSON.stringify({
               title: this.title,
               content: this.content,
