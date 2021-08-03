@@ -9,8 +9,6 @@ import animate from 'animate.css';
 
 Vue.use(animate);
 
-Vue.prototype.$api = 'https://ricrdev-todoapi.herokuapp.com';
-
 // Import the Auth0 configuration
 import { domain, clientId } from "../auth_config.json";
 // Import the plugin here

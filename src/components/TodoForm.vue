@@ -64,8 +64,6 @@
 <script>
 import axios from "axios";
 
-const url = `${this.$api}/addtodo.php`;
-
 export default {
   data() {
     return {
@@ -82,7 +80,7 @@ export default {
       } else {
         axios
           .post(
-            url,
+            `${this.$api}/addtodo.php`,
             JSON.stringify({
               title: this.title,
               content: this.content,
