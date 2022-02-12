@@ -62,48 +62,43 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   data() {
     return {
-      title: "",
-      content: "",
+      title: '',
+      content: '',
     };
   },
   methods: {
     addTodo() {
-      if (this.title === "") {
-        alert("add a title");
-      } else if (this.content === "") {
-        alert("add the content");
+      if (this.title === '') {
+        alert('add a title');
+      } else if (this.content === '') {
+        alert('add the content');
       } else {
-        axios
-          .post(
-            `https://ricrdev-todoapi.herokuapp.com/addtodo.php`,
-            JSON.stringify({
-              title: this.title,
-              content: this.content,
-              userid: this.$auth.user.sub,
-            })
-          )
-          .then((response) => {
-            response ? console.log("added") : console.log("an error occurred");
+        const todo = {
+          title: this.title,
+          content: this.content,
+          created: Date.now(),
+          complete: 'no',
+        }
 
-            this.resetFields();
-          });
-        // (error) => {
-        //     console.log(error)
-        // })
+        const todos = JSON.parse(localStorage.getItem('todos'));
+        if (!todos) {
+          localStorage.setItem('todos', JSON.stringify([todo]))
+          this.resetFields();
+          return;
+        }
 
-        //this.resetFields()
+        localStorage.setItem('todos', JSON.stringify([...todos, todo]))
+        this.resetFields()
+
+        this.$root.$refs.getTodos.getTodos();
       }
     },
     resetFields() {
-      this.title = "";
-      this.content = "";
-
-      this.$root.$refs.getTodos.getTodos();
+      this.title = '';
+      this.content = '';
     },
   },
 };

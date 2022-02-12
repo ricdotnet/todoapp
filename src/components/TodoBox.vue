@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="mx-auto w-2/3 md:w-1/2 lg:w-1/2">
-      <!--			<ModalBox v-show="this.showEditModal" contenteditable="true" title="Edit..." text="Editing this modal uuuhhhhhiiiiiiuuuhhh" />-->
 
       <transition-group
         enter-active-class="animate__bounceIn"
@@ -10,7 +9,7 @@
       >
         <li
           v-for="todo in todoList"
-          :key="todo.id"
+          :key="todo.created"
           class="
             card
             bg-black bg-opacity-30
@@ -21,10 +20,10 @@
             mb-5
             overflow-ellipsis
           "
-          v-bind:id="todo.id"
+          v-bind:id="todo.created"
         >
           <div class="pb-5 border-b border-gray-600 uppercase font-bold">
-            {{ todo.title }} {{ todo.id }}
+            {{ todo.title }}
           </div>
 
           <div class="p-5 border-b border-gray-600">
@@ -59,7 +58,7 @@
               <button
                 @click.prevent="
                   showConfirmComplete();
-                  currentTodo = todo.id;
+                  currentTodo = todo.created;
                 "
                 class="
                   pl-2
@@ -114,7 +113,6 @@
                   <div class="mb-10">
                     Have you really completed this ToDo item?
                   </div>
-                  <!--									<button @click.prevent="setComplete(todo.id), getTodos(), showConfirmComplete()"-->
                   <button
                     @click.prevent="
                       setComplete(), getTodos(), showConfirmComplete()
@@ -191,83 +189,83 @@
             </div>
 
             <!-- edit button -->
-            <div>
-              <button
-                class="
-                  mt-5
-                  ml-3
-                  pl-2
-                  pr-2
-                  pt-1
-                  pb-1
-                  bg-blue-500
-                  focus:outline-none
-                  hover:bg-blue-600
-                  active:bg-blue-700
-                  rounded-sm
-                "
-                @click="
-                  editMode = !editMode;
-                  saveTodo(todo.id);
-                "
-              >
-                <span v-show="!editMode">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20px"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                    />
-                  </svg>
-                </span>
-                <span class="flex" v-show="editMode">
-                  <span class="relative animate-ping">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20px"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-                      />
-                    </svg>
-                  </span>
-                  <span class="absolute">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20px"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-                      />
-                    </svg>
-                  </span>
-                </span>
-              </button>
-            </div>
+<!--            <div>-->
+<!--              <button-->
+<!--                class="-->
+<!--                  mt-5-->
+<!--                  ml-3-->
+<!--                  pl-2-->
+<!--                  pr-2-->
+<!--                  pt-1-->
+<!--                  pb-1-->
+<!--                  bg-blue-500-->
+<!--                  focus:outline-none-->
+<!--                  hover:bg-blue-600-->
+<!--                  active:bg-blue-700-->
+<!--                  rounded-sm-->
+<!--                "-->
+<!--                @click="-->
+<!--                  editMode = !editMode;-->
+<!--                  saveTodo(todo.created);-->
+<!--                "-->
+<!--              >-->
+<!--                <span v-show="!editMode">-->
+<!--                  <svg-->
+<!--                    xmlns="http://www.w3.org/2000/svg"-->
+<!--                    width="20px"-->
+<!--                    fill="none"-->
+<!--                    viewBox="0 0 24 24"-->
+<!--                    stroke="currentColor"-->
+<!--                  >-->
+<!--                    <path-->
+<!--                      stroke-linecap="round"-->
+<!--                      stroke-linejoin="round"-->
+<!--                      stroke-width="2"-->
+<!--                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"-->
+<!--                    />-->
+<!--                  </svg>-->
+<!--                </span>-->
+<!--                <span class="flex" v-show="editMode">-->
+<!--                  <span class="relative animate-ping">-->
+<!--                    <svg-->
+<!--                      xmlns="http://www.w3.org/2000/svg"-->
+<!--                      width="20px"-->
+<!--                      fill="none"-->
+<!--                      viewBox="0 0 24 24"-->
+<!--                      stroke="currentColor"-->
+<!--                    >-->
+<!--                      <path-->
+<!--                        stroke-linecap="round"-->
+<!--                        stroke-linejoin="round"-->
+<!--                        stroke-width="2"-->
+<!--                        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"-->
+<!--                      />-->
+<!--                    </svg>-->
+<!--                  </span>-->
+<!--                  <span class="absolute">-->
+<!--                    <svg-->
+<!--                      xmlns="http://www.w3.org/2000/svg"-->
+<!--                      width="20px"-->
+<!--                      fill="none"-->
+<!--                      viewBox="0 0 24 24"-->
+<!--                      stroke="currentColor"-->
+<!--                    >-->
+<!--                      <path-->
+<!--                        stroke-linecap="round"-->
+<!--                        stroke-linejoin="round"-->
+<!--                        stroke-width="2"-->
+<!--                        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"-->
+<!--                      />-->
+<!--                    </svg>-->
+<!--                  </span>-->
+<!--                </span>-->
+<!--              </button>-->
+<!--            </div>-->
 
             <!-- delete button -->
             <div>
               <button
-                @click.prevent="removeTodo(todo.id)"
+                @click.prevent="removeTodo(todo.created)"
                 class="
                   mt-5
                   ml-3
@@ -308,7 +306,7 @@
         leave-active-class="animate__bounceOut"
       >
         <div
-          v-if="todoList.length == 0"
+          v-if="todoList.length === 0"
           class="p-5 bg-red-200 bg-opacity-10 rounded-md shadow font-semibold"
         >
           Add your first ToDo.
@@ -319,8 +317,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   data() {
     return {
@@ -328,14 +324,13 @@ export default {
       confirmComplete: false,
       showEditModal: false,
       editMode: false,
-      currentTodo: "",
+      currentTodo: '',
     };
   },
   mounted: function () {
     this.getTodos();
-
-    window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
         this.showEditModal = false;
         this.confirmComplete = false;
       }
@@ -343,50 +338,26 @@ export default {
   },
 
   methods: {
-    async getTodos() {
-      //console.log(this.$auth.user.sub)
-
-      await axios
-        .get(
-          `https://ricrdev-todoapi.herokuapp.com/retrievetodo.php?user=${this.$auth.user.sub}`
-        )
-        // .then(response => (this.todoList = response.data))
-        .then((response) => {
-          this.todoList = [];
-          for (let todo in response.data) {
-            this.todoList.push(response.data[todo]);
-          }
-        });
+    getTodos() {
+      this.todoList = JSON.parse(localStorage.getItem('todos')) || [];
+      this.todoList.sort((a, b) => b.created - a.created);
     },
 
-    async removeTodo(id) {
-      await axios
-        .post(
-          `https://ricrdev-todoapi.herokuapp.com/removetodo.php`,
-          JSON.stringify({
-            id: id,
-          })
-        )
-        .then((response) => {
-          response
-            ? console.log(`removed ${id}`)
-            : console.log("an error occurred");
-        });
+    removeTodo(created) {
+      this.todoList = this.todoList.filter(t => t.created !== created);
+      localStorage.setItem('todos', JSON.stringify(this.todoList));
 
-      await this.getTodos();
+      this.getTodos();
     },
 
-    async setComplete() {
-      await axios
-        .get(
-          `https://ricrdev-todoapi.herokuapp.com/removetodo.php?complete=yes&id=${this.currentTodo}`
-        )
-        .then((response) => {
-          response
-            ? console.log(`completed ${this.currentTodo}`)
-            : console.log("an error occurred");
-        });
-      //console.log(id)
+    setComplete() {
+      this.todoList.map(t => {
+        if (t.created === this.currentTodo) {
+          t.complete = 'yes';
+        }
+      });
+
+      localStorage.setItem('todos', JSON.stringify(this.todoList));
     },
 
     //toggle confirm complete
@@ -395,21 +366,15 @@ export default {
     },
 
     //saving todo
-    async saveTodo(id) {
+    async saveTodo(created) {
       const todoContent = document.getElementById("todoContent");
       if (!this.editMode) {
-        await axios
-          .post(
-            `https://ricrdev-todoapi.herokuapp.com/savetodo.php`,
-            JSON.stringify({
-              todoid: id,
-              content: todoContent.innerText,
-            })
-          )
-          .then((response) => {
-            response ? console.log("saved") : console.log("an error occurred");
-            //console.log(response)
-          });
+        this.todoList.map(t => {
+          if (t.created === created) {
+            t.content = todoContent.innerHTML.trim();
+          }
+        });
+        localStorage.setItem('todos', JSON.stringify(this.todoList));
       }
     },
   },
