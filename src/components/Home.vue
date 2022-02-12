@@ -38,9 +38,14 @@ export default {
 
   beforeMount() {
     this.checkThemeOnLoad();
+    this.hasAnyTodo();
   },
 
   methods: {
+    hasAnyTodo() {
+      const todos = localStorage.getItem('todos');
+      if (!todos) localStorage.setItem('todos', JSON.stringify([]));
+    },
     toggleDarkMode() {
       //console.log("before load")
       //document.body.style = "background-color: #000";
